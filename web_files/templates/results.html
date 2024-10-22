@@ -44,7 +44,20 @@
         <div class="right-side">
             <div class="result-info">
                 <h2>Información Adicional</h2>
-                <p>FALTA </p>
+                {% if information %}
+                    {% for info in information %}
+                        <p><strong>Descripción:</strong> {{ info.description }}</p>
+                        <p><strong>Locus:</strong> {{ info.locus }}</p>
+                        <p><strong>Fuente:</strong> {{ info.source }}</p>
+                        <p><strong>Organismo:</strong> {{ info.organism }}</p>
+                        <p><strong>Comentario:</strong> {{ info.comment }}</p>
+                        <p><strong>Gen:</strong> {{ info.gene }}</p>
+                        <p><strong>Sinónimos de Gen:</strong> {{ info.gene_synonyms }}</p>
+                        <p><strong>Artículos:</strong> {{ info.articles }}</p>
+                    {% endfor %}
+                {% else %}
+                    <p>Información no disponible.</p>
+                {% endif %}
             </div>
         </div>
     </div>
