@@ -1,5 +1,6 @@
 body {
     font-family: Arial, sans-serif;
+    font-size: 18px;
     margin: 0;
     padding: 0;
     display: flex;
@@ -11,9 +12,9 @@ body {
 
 /* Estilos para la barra superior */
 .header {
-    background-color: #0066cc;
+    background-color:  #33637f;
     padding: 10px;
-    color: white;
+    color: #eaf2f5;
     display: flex;
     align-items: center;
     position: fixed;
@@ -43,12 +44,13 @@ body {
 .container {
     display: flex;
     justify-content: space-between;
-    margin-top: 80px;
+    margin-top: 150px;
     padding: 20px;
     width: 90%;
-    max-width: 1200px;
+    max-width: 1400px;
     background-color: #fff;
     box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+    min-width: 1200px;
 }
 
 /* Estilos para el lado izquierdo */
@@ -74,8 +76,8 @@ body {
 }
 
 .upload-section button {
-    background-color: #0066cc;
-    color: white;
+    background-color:  #33637f;
+    color: #eaf2f5;
     padding: 20px 40px;
     border: none;
     cursor: pointer;
@@ -102,7 +104,7 @@ body {
 }
 
 .search-bar button {
-    background-color: #0066cc;
+    background-color: #eaf2f5;
     border: none;
     padding: 10px;
     border-radius: 0 5px 5px 0;
@@ -127,7 +129,7 @@ body {
 
 .most-searched a {
     display: block;
-    color: #0066cc;
+    color: #33637f;
     margin-bottom: 10px;
     text-decoration: none;
 }

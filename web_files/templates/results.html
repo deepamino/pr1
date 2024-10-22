@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DeepAmino - Resultados</title>
+    <link rel="icon" href="{{ url_for('static', filename='tu-icono-url.png') }}" type="image/png">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+
+    <!-- Barra superior de cabecera -->
+    <div class="header">
+        <div class="logo">
+            <img src="{{ url_for('static', filename='tu-icono-url.png') }}" alt="Logo" style="width: 150px; height: 150px;">
+        </div>
+        <h1>DeepAmino - Resultados</h1>
+    </div>
+
+    <!-- Contenedor principal -->
+    <div class="container">
+        <!-- Lado izquierdo (Resultados de la secuencia) -->
+        <div class="left-side">
+            <h2>Secuencia de Aminoácidos</h2>
+            <p>A continuación, se muestran las secuencias de aminoácidos procesadas del archivo que has subido.</p>
+            
+            {% if proteins %}
+                <div class="protein-sequences">
+                    <ul>
+                        {% for protein in proteins %}
+                            <li>
+                                <strong>Proteína {{ protein.id }} (GC= {{ protein.gc }}%):</strong>
+                                <pre style="white-space: pre-wrap; word-wrap: break-word;">{{ protein.protein_sequences }}</pre>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% else %}
+                <p>No se encontraron secuencias de proteínas.</p>
+            {% endif %}
+        </div>
+
+        <!-- Lado derecho (Texto adicional) -->
+        <div class="right-side">
+            <div class="result-info">
+                <h2>Información Adicional</h2>
+                <p>FALTA </p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
