@@ -15,6 +15,21 @@ app.config['SAVE_FOLDER'] = SAVE_FOLDER
 def index():
     return render_template('index.html')
 
+@app.route('/deepamino/process_search', methods=['GET'])
+def process_search():
+    search_term = request.args.get('search_term')
+
+    if search_term:
+        api_manager = ApiManager()
+        protein_info = api_manager.reques_info(search_term)
+        
+        if protein_info:
+            return render_template('results.html', information=[protein_info])
+        else:
+            return f"No se encontró información para el ID: {search_term}"
+    
+    return "No se ingresó ningún término de búsqueda."
+
 @app.route('/deepamino/upload', methods=['POST'])
 def upload_file():
     api_manager = ApiManager()
@@ -41,7 +56,6 @@ def upload_file():
             for protein in protein_objects:
                 info = api_manager.reques_info(protein.id)
                 information_objects.append(info)
-                print(info)
             
         except Exception as e:
             return f"Error al procesar el archivo: {str(e)}"
@@ -58,5 +72,3 @@ if __name__ == '__main__':
     if not os.path.exists(UPLOAD_FOLDER):
         os.makedirs(UPLOAD_FOLDER)
     app.run(debug=True)
-
-# localhost:8080/info?id=1

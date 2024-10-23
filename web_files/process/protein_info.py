@@ -1,7 +1,7 @@
 
 class ProteinInfo:
 
-    description = ""
+    definition = ""
     locus = ""
     source = ""
     organism = ""
@@ -10,8 +10,8 @@ class ProteinInfo:
     gene_synonyms = ""
     articles = ""
 
-    def set_description(self, description):
-        self.description = description
+    def set_definition(self, definition):
+        self.definition = definition
     
     def set_locus(self, locus):
         self.locus = locus

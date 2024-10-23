@@ -1,65 +1,118 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DeepAmino - Resultados</title>
-    <link rel="icon" href="{{ url_for('static', filename='tu-icono-url.png') }}" type="image/png">
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <title>DeepAmino - Results</title>
+    <link rel="icon" href="{{ url_for('static', filename='your-icon-url.png') }}" type="image/png">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles2.css') }}">
 </head>
 <body>
 
-    <!-- Barra superior de cabecera -->
+    <!-- Header bar -->
     <div class="header">
         <div class="logo">
-            <img src="{{ url_for('static', filename='tu-icono-url.png') }}" alt="Logo" style="width: 150px; height: 150px;">
+            <img src="{{ url_for('static', filename='your-icon-url.png') }}" alt="Logo" style="width: 150px; height: 150px;">
         </div>
-        <h1>DeepAmino - Resultados</h1>
+        <h1>DeepAmino - Results</h1>
     </div>
 
-    <!-- Contenedor principal -->
-    <div class="container">
-        <!-- Lado izquierdo (Resultados de la secuencia) -->
-        <div class="left-side">
-            <h2>Secuencia de Aminoácidos</h2>
-            <p>A continuación, se muestran las secuencias de aminoácidos procesadas del archivo que has subido.</p>
-            
-            {% if proteins %}
-                <div class="protein-sequences">
-                    <ul>
-                        {% for protein in proteins %}
-                            <li>
-                                <strong>Proteína {{ protein.id }} (GC= {{ protein.gc }}%):</strong>
-                                <pre style="white-space: pre-wrap; word-wrap: break-word;">{{ protein.protein_sequences }}</pre>
-                            </li>
-                        {% endfor %}
-                    </ul>
-                </div>
-            {% else %}
-                <p>No se encontraron secuencias de proteínas.</p>
-            {% endif %}
-        </div>
-
-        <!-- Lado derecho (Texto adicional) -->
-        <div class="right-side">
-            <div class="result-info">
-                <h2>Información Adicional</h2>
-                {% if information %}
-                    {% for info in information %}
-                        <p><strong>Descripción:</strong> {{ info.description }}</p>
-                        <p><strong>Locus:</strong> {{ info.locus }}</p>
-                        <p><strong>Fuente:</strong> {{ info.source }}</p>
-                        <p><strong>Organismo:</strong> {{ info.organism }}</p>
-                        <p><strong>Comentario:</strong> {{ info.comment }}</p>
-                        <p><strong>Gen:</strong> {{ info.gene }}</p>
-                        <p><strong>Sinónimos de Gen:</strong> {{ info.gene_synonyms }}</p>
-                        <p><strong>Artículos:</strong> {{ info.articles }}</p>
-                    {% endfor %}
+    <!-- Main container -->
+    <div class="outer-container">
+        <div class="container">
+            <!-- Left side (Sequence Results) -->
+            <div class="left-side">
+                <h2>Amino Acid Sequence</h2>
+                <p>The following are the processed amino acid sequences from the file you uploaded.</p>
+                
+                {% if proteins %}
+                    <div class="protein-sequences">
+                        <ul>
+                            {% for protein in proteins %}
+                                <li>
+                                    <strong>Protein {{ protein.id }} (GC= {{ protein.gc }}%):</strong>
+                                    <pre style="white-space: pre-wrap; word-wrap: break-word;">{{ protein.protein_sequences }}</pre>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
                 {% else %}
-                    <p>Información no disponible.</p>
+                    <p>No protein sequences found.</p>
                 {% endif %}
             </div>
+
+            <!-- Right side (Additional Information) -->
+            <div class="right-side">
+                <div class="result-info">
+                    <h2>Additional Information</h2>
+                    {% if information %}
+                        {% for info in information %}
+                            <div class="info-item">
+                                <!-- Description -->
+                                <p><strong>Description:</strong> {{ info.definition }}</p>
+                                
+                                <!-- Comment with Show more -->
+                                <p><strong>Comment:</strong></p>
+                                <p class="comment">
+                                    <span class="comment-text">{{ info.comment | truncate(100) }}</span>
+                                    <button class="show-more-btn" data-comment="{{ info.comment }}">Show more</button>
+                                </p>
+
+                                <!-- Additional Information -->
+                                <p><strong>Locus:</strong> {{ info.locus }}</p>
+                                <p><strong>Source:</strong> {{ info.source }}</p>
+                                <p><strong>Organism:</strong> {{ info.organism }}</p>
+                                <p><strong>Gene:</strong> {{ info.gene }}</p>
+                                <p><strong>Gene Synonyms:</strong> {{ info.gene_synonyms }}</p>
+                                <p><strong>Articles:</strong> {{ info.articles }}</p>
+                            </div>
+                            
+                        {% endfor %}
+                    {% else %}
+                        <p>Information not available.</p>
+                    {% endif %}
+                </div>
+            </div>
+            
         </div>
     </div>
+
+    <!-- Modal -->
+    <div id="commentModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2>Full Comment</h2>
+            <p id="modal-text"></p>
+        </div>
+    </div>
+
+    <script>
+        // Get the modal and elements
+        const modal = document.getElementById("commentModal");
+        const modalText = document.getElementById("modal-text");
+        const closeModalBtn = document.querySelector(".close-btn");
+
+        // Close the modal when the close button is clicked
+        closeModalBtn.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        // Close the modal when the user clicks anywhere outside of the modal
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+
+        // Open the modal and display the full comment when "Show more" is clicked
+        document.querySelectorAll('.show-more-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const fullComment = this.getAttribute('data-comment');
+                modalText.textContent = fullComment; // Set the full comment text in the modal
+                modal.style.display = "block"; // Show the modal
+            });
+        });
+    </script>
+    
 </body>
 </html>

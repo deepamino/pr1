@@ -66,23 +66,28 @@ body {
 
 .upload-section {
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    margin-top: 40px;
+    flex-direction: column; /* Coloca los elementos en columnas */
+    align-items: flex-start; /* Alinea los elementos a la izquierda */
+    gap: 15px; /* Añade espacio entre el input y el botón */
 }
 
 .upload-section input[type="file"] {
-    margin-bottom: 30px;
+    margin-bottom: 40px;
+    display: block;
 }
 
 .upload-section button {
-    background-color:  #33637f;
-    color: #eaf2f5;
-    padding: 20px 40px;
+    width: 100px;
+    padding: 10px;
+    background-color: #33637f;
+    color: white;
     border: none;
     cursor: pointer;
     border-radius: 5px;
-    font-size: 16px;
+}
+
+.upload-section button:hover {
+    background-color: #284a5c;
 }
 
 /* Estilos para el lado derecho */
@@ -91,32 +96,30 @@ body {
     padding: 100px;
 }
 
-.search-bar {
-    display: flex;
-    margin-bottom: 60px;
+.search-bar form {
+    display: flex; /* Usamos flexbox para alinear los elementos en una fila */
+    align-items: center; /* Alineamos verticalmente los elementos */
 }
 
 .search-bar input[type="text"] {
-    width: 80%;
-    padding: 10px;
+    flex-grow: 1; /* Esto asegura que el campo de texto ocupe el mayor espacio posible */
+    padding: 8px;
     border: 1px solid #ccc;
-    border-radius: 5px 0 0 5px;
+    border-radius: 4px;
 }
 
 .search-bar button {
-    background-color: #eaf2f5;
+    background: none;
     border: none;
-    padding: 10px;
-    border-radius: 0 5px 5px 0;
+    padding: 4px;
+    margin-left: 0px; /* Espacio entre el input y el botón */
     cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    background-color: #33637f;
 }
 
-.search-bar button img {
-    width: 20px;
-    height: 20px;
+.search-bar img {
+    width: 24px; /* Tamaño de la imagen */
+    height: 24px;
 }
 
 .most-searched {
