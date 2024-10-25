@@ -31,7 +31,11 @@
                             {% for protein in proteins %}
                                 <li>
                                     <strong>Protein {{ protein.id }} (GC= {{ protein.gc }}%):</strong>
-                                    <pre style="white-space: pre-wrap; word-wrap: break-word;">{{ protein.protein_sequences }}</pre>
+                                    <!-- Truncate protein sequence and add Show more button -->
+                                    <p class="protein-sequence">
+                                        <pre class="sequence-text" style="white-space: pre-wrap; word-wrap: break-word;">{{ protein.protein_sequences[:400] }}...</pre> <!-- Show first 100 characters -->
+                                        <button class="show-more-btn" data-content="{{ protein.protein_sequences }}" data-type="protein-sequence">Show full sequence</button>
+                                    </p>
                                 </li>
                             {% endfor %}
                         </ul>
@@ -55,7 +59,7 @@
                                 <p><strong>Comment:</strong></p>
                                 <p class="comment">
                                     <span class="comment-text">{{ info.comment | truncate(100) }}</span>
-                                    <button class="show-more-btn" data-comment="{{ info.comment }}">Show more</button>
+                                    <button class="show-more-btn" data-content="{{ info.comment }}" data-type="comment">Show more</button>
                                 </p>
 
                                 <!-- Additional Information -->
@@ -63,10 +67,21 @@
                                 <p><strong>Source:</strong> {{ info.source }}</p>
                                 <p><strong>Organism:</strong> {{ info.organism }}</p>
                                 <p><strong>Gene:</strong> {{ info.gene }}</p>
-                                <p><strong>Gene Synonyms:</strong> {{ info.gene_synonyms }}</p>
-                                <p><strong>Articles:</strong> {{ info.articles }}</p>
+                                <p><strong>Gene Synonyms:</strong> {{ info.geneSynonyms }}</p>
+                                
+                                <!-- References with Show more for all articles -->
+                                <p><strong>References:</strong></p>
+                                {% if info.references %}
+                                <div style="margin-left: 20px;">
+                                    <p><strong>Title:</strong> {{ info.references[0].title }}</p>
+                                    <p><strong>Authors:</strong> {{ info.references[0].authors }}</p>
+                                    <p><strong>Journal:</strong> {{ info.references[0].Journal }}</p>
+                                    <button class="show-more-btn" data-content="{% for reference in info.references %}<strong>Title:</strong> {{ reference.title }}<br><strong>Authors:</strong> {{ reference.authors }}<br><strong>Journal:</strong> {{ reference.Journal }}<br><br>{% endfor %}" data-type="references">Show all references</button>
+                                </div>
+                                {% else %}
+                                    <p>No references available.</p>
+                                {% endif %}
                             </div>
-                            
                         {% endfor %}
                     {% else %}
                         <p>Information not available.</p>
@@ -78,18 +93,19 @@
     </div>
 
     <!-- Modal -->
-    <div id="commentModal" class="modal">
+    <div id="contentModal" class="modal">
         <div class="modal-content">
             <span class="close-btn">&times;</span>
-            <h2>Full Comment</h2>
+            <h2 id="modal-title"></h2>
             <p id="modal-text"></p>
         </div>
     </div>
 
     <script>
         // Get the modal and elements
-        const modal = document.getElementById("commentModal");
+        const modal = document.getElementById("contentModal");
         const modalText = document.getElementById("modal-text");
+        const modalTitle = document.getElementById("modal-title");
         const closeModalBtn = document.querySelector(".close-btn");
 
         // Close the modal when the close button is clicked
@@ -104,12 +120,14 @@
             }
         }
 
-        // Open the modal and display the full comment when "Show more" is clicked
+        // Open the modal and display the full content when "Show more" is clicked
         document.querySelectorAll('.show-more-btn').forEach(button => {
             button.addEventListener('click', function() {
-                const fullComment = this.getAttribute('data-comment');
-                modalText.textContent = fullComment; // Set the full comment text in the modal
-                modal.style.display = "block"; // Show the modal
+                const content = this.getAttribute('data-content');
+                const type = this.getAttribute('data-type');
+                modalText.innerHTML = content.replace(/\n/g, '<br>'); // Preserve new lines
+                modalTitle.textContent = type === 'comment' ? 'Full Comment' : (type === 'protein-sequence' ? 'Full Protein Sequence' : 'All References');
+                modal.style.display = "block";
             });
         });
     </script>

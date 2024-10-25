@@ -1,4 +1,4 @@
-class Protein:
+class ProteinNCBI:
 
     def __init__(self, id, description, protein_sequences, gc ):
         self.id = id

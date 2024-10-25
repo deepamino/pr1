@@ -1,4 +1,4 @@
-from .biopython_translator import BiopythonTranslator
+from .ncbi_model.biopython_translator import BiopythonTranslator
 
 class TranslatorFactory:
 

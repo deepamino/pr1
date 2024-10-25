@@ -1,7 +1,7 @@
 from Bio import SeqIO
 from Bio.Seq import Seq
 from Bio.SeqRecord import SeqRecord
-from process.protein import Protein
+from process.ncbi_model.protein_ncbi import ProteinNCBI
 
 class BiopythonTranslator:
 
@@ -47,7 +47,7 @@ class BiopythonTranslator:
 
             protein_seq = self.translate_to_protein(record.seq)
             
-            protein_result = Protein(id=record.id, description=record.description, protein_sequences=protein_seq, gc=gc_content)
+            protein_result = ProteinNCBI(id=record.id, description=record.description, protein_sequences=protein_seq, gc=gc_content)
             protein_record = SeqRecord(Seq(protein_seq), id=record.id, description=record.description)
 
             proteins_results.append(protein_result)

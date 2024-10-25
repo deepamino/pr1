@@ -1,5 +1,5 @@
 
-class ProteinInfo:
+class BioObjectInfo:
 
     definition = ""
     locus = ""
@@ -7,8 +7,8 @@ class ProteinInfo:
     organism = ""
     comment = ""
     gene = ""
-    gene_synonyms = ""
-    articles = ""
+    geneSynonyms = ""
+    references = ""
 
     def set_definition(self, definition):
         self.definition = definition
@@ -28,8 +28,8 @@ class ProteinInfo:
     def set_gene(self, gene):
         self.gene = gene
     
-    def set_gene_synonyms(self, gene_synonyms):
-        self.gene_synonyms = gene_synonyms
+    def set_geneSynonyms(self, geneSynonyms):
+        self.geneSynonyms = geneSynonyms
     
-    def set_articles(self, articles):
-        self.articles = articles
+    def set_references(self, references):
+        self.references = references
