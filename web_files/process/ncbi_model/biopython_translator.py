@@ -2,6 +2,7 @@ from Bio import SeqIO
 from Bio.Seq import Seq
 from Bio.SeqRecord import SeqRecord
 from process.ncbi_model.protein_ncbi import ProteinNCBI
+import os
 
 class BiopythonTranslator:
 
@@ -37,7 +38,7 @@ class BiopythonTranslator:
         gc_content = (gc_pairs_count * 2 / len(nucleotide_seq)) * 100
         return round(gc_content,2)
         
-    def process_fasta(self, fasta_file, output_fasta):
+    def process_fasta(self, fasta_file, output_fasta, delete):
         nucleotide_sequences = self.read_fasta(fasta_file)
         protein_records = [] 
         proteins_results = []
@@ -52,9 +53,23 @@ class BiopythonTranslator:
 
             proteins_results.append(protein_result)
             protein_records.append(protein_record)
+        
+        if protein_records:
+            name =  protein_records[0].id.split(".")[0]
+            output_file = os.path.join(output_fasta, name + ".fasta") 
+            self.write_protein_fasta(protein_records, output_file)
 
-        self.write_protein_fasta(protein_records, output_fasta)
+        if delete:
+            self.delete_file(fasta_file)
 
         return proteins_results
+    
+    def delete_file(self, filename):
+        try:
+            os.remove(filename)
+        except FileNotFoundError:
+            raise Exception(f"Archivo {filename} no encontrado.")
+        except Exception as e:
+            raise Exception(f"Error al eliminar el archivo: {str(e)}")
 
 

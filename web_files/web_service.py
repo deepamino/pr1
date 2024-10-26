@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, send_from_directory
 from werkzeug.utils import secure_filename
 from process.translate_factory import TranslatorFactory
 from process.api_manager import ApiManager
@@ -43,7 +43,7 @@ def process_most_search():
     translator = TranslatorFactory.initialize_collector('Biopython')
 
     try:
-        protein_objects = translator.process_fasta(file_path, save_path)
+        protein_objects = translator.process_fasta(file_path, save_path, False)
         information_objects = []
 
         for protein in protein_objects:
@@ -69,13 +69,12 @@ def upload_file():
     if file:
         filename = secure_filename(file.filename)
         file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-        save_path = os.path.join(app.config['SAVE_FOLDER'], filename)
         file.save(file_path)
         
         translator = TranslatorFactory.initialize_collector('Biopython')
 
         try:
-            protein_objects = translator.process_fasta(file_path, save_path)
+            protein_objects = translator.process_fasta(file_path, app.config['SAVE_FOLDER'], True)
             information_objects = []
 
             for protein in protein_objects:
@@ -93,6 +92,11 @@ def results():
     information_objects = request.args.getlist('information')
     print(information_objects)
     return render_template('results.html', proteins=protein_objects, information=information_objects)
+
+@app.route('/deepamino/download/<filename>')
+def download_file(filename):
+    name = filename.split(".")[0] + ".fasta"
+    return send_from_directory("../"+ app.config['SAVE_FOLDER'] + "/", name, as_attachment=True)
 
 if __name__ == '__main__':
     if not os.path.exists(UPLOAD_FOLDER):

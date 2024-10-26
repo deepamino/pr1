@@ -40,6 +40,11 @@
                             {% endfor %}
                         </ul>
                     </div>
+                    <div class="download-section">
+                        <a href="{{ url_for('download_file', filename=proteins[0].id + '.fasta') }}" class="download-btn" download>
+                            Download result
+                        </a>
+                    </div>
                 {% else %}
                     <p>No protein sequences found.</p>
                 {% endif %}
