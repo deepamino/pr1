@@ -23,7 +23,7 @@ def process_search():
 
     if search_term:
         api_manager = ApiManager()
-        protein_info = api_manager.reques_info(search_term)
+        protein_info = api_manager.request_info(search_term)
         protein_object = api_manager.get_sequences(search_term)
         
         if protein_info:
@@ -48,7 +48,7 @@ def process_most_search():
         information_objects = []
 
         for protein in protein_objects:
-            info = api_manager.reques_info(protein.id)
+            info = api_manager.request_info(protein.id)
             information_objects.append(info)
     except Exception as e:
             return f"Error al procesar el archivo: {str(e)}"
@@ -79,7 +79,7 @@ def upload_file():
             information_objects = []
 
             for protein in protein_objects:
-                info = api_manager.reques_info(protein.id)
+                info = api_manager.request_info(protein.id)
                 information_objects.append(info)
             
         except Exception as e:

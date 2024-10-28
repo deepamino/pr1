@@ -8,7 +8,7 @@ class ApiManager:
     _url='http://localhost:8080/info'
     _url_sequence='http://localhost:8080/sequence'
 
-    def reques_info(self, id):
+    def request_info(self, id):
         params = {'id': id}
         response = requests.get(ApiManager._url, params=params)
 
