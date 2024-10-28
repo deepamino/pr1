@@ -1,5 +1,7 @@
 import os
-from flask import Flask, render_template, request, send_from_directory
+import time
+import threading
+from flask import Flask, render_template, request, send_from_directory, abort, after_this_request
 from werkzeug.utils import secure_filename
 from process.translate_factory import TranslatorFactory
 from process.api_manager import ApiManager
@@ -90,13 +92,31 @@ def upload_file():
 def results():
     protein_objects = request.args.getlist('proteins')
     information_objects = request.args.getlist('information')
-    print(information_objects)
     return render_template('results.html', proteins=protein_objects, information=information_objects)
+
+def delayed_remove(file_path):
+    time.sleep(1)
+    try:
+        os.remove(file_path)
+    except Exception as e:
+        print(f"Error al eliminar el archivo: {e}")
+
 
 @app.route('/deepamino/download/<filename>')
 def download_file(filename):
     name = filename.split(".")[0] + ".fasta"
-    return send_from_directory("../"+ app.config['SAVE_FOLDER'] + "/", name, as_attachment=True)
+    file_path = os.path.join(app.config['SAVE_FOLDER'], name)
+
+    if os.path.exists(file_path):
+        @after_this_request
+        def remove_file(response):
+            threading.Thread(target=delayed_remove, args=(file_path,)).start()
+            return response
+
+        return send_from_directory("../" + app.config['SAVE_FOLDER'] + "/", name, as_attachment=True)
+    else:
+        return abort(404)
+
 
 if __name__ == '__main__':
     if not os.path.exists(UPLOAD_FOLDER):
