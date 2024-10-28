@@ -27,6 +27,7 @@ class BiopythonTranslator:
         return protein_seq
     
     def write_protein_fasta(self, protein_sequences, output_file):
+        print(output_file)
         try:
             with open(output_file, "w") as output_handle:
                 SeqIO.write(protein_sequences, output_handle, "fasta")

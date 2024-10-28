@@ -40,12 +40,11 @@ def process_most_search():
     filename = search_id + '.fasta'
     
     file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-    save_path = os.path.join(app.config['SAVE_FOLDER'], filename)
 
     translator = TranslatorFactory.initialize_collector('Biopython')
 
     try:
-        protein_objects = translator.process_fasta(file_path, save_path, False)
+        protein_objects = translator.process_fasta(file_path, app.config['SAVE_FOLDER'], False)
         information_objects = []
 
         for protein in protein_objects:
