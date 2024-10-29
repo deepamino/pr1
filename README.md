@@ -31,3 +31,72 @@ Todo lo mencionado previamente ha sido implementado, incluyendo una interfaz de 
 - `/web_files/templates`: este directorio contiene archivos HTML que sirven como estructuras base para las páginas del sitio.
 - `/web_files/web_service.py`: este archivo inicializa la aplicación web en Flask que permite la búsqueda, procesamiento y descarga de información sobre proteínas a partir de términos de búsqueda o archivos .fasta, utilizando una interfaz de usuario y varios servicios de API para gestionar y presentar datos relacionados con secuencias de proteínas.
 
+## 2. Descripción de la Interfaz de Usuario
+
+En este apartado se mostrarán las dos páginas disponibles de la web. 
+
+Por un lado, la Figura 2 muestra una interfaz de usuario web de una aplicación llamada **DeepAmino**. En la parte superior, hay un encabezado con el nombre de la aplicación y un ícono de ADN.
+
+La página está dividida en dos secciones:
+
+1. **Izquierda**: Hay un cuadro de subida de archivos con el título "Upload your FASTA file". Este cuadro permite al usuario cargar un archivo en formato FASTA, que contiene secuencias de nucleótidos o aminoácidos. Debajo de la instrucción hay un botón para seleccionar el archivo y otro botón de "Upload" para cargarlo en la aplicación.
+
+2. **Derecha**: Un cuadro de búsqueda con un campo de texto para que el usuario ingrese un término, el cual debe ser el identificador correspndiente a la base de datos del *National Center for Biotechnology Information* y un botón de búsqueda a la derecha. Debajo, hay una sección titulada "Most Searched" que muestra enlaces a proteínas populares como *Hemoglobin*, *Insulin*, *Collagen*, y *Keratin*.
+
+<div align="center">
+    <img src="images_readme/index.png" alt="Index.html" />
+      <p><strong>Figura 2.</strong> Página principal de la web.</p> 
+  </div>
+
+Por otro lado, la Figura 3 muestra la interfaz de resultados de la aplicación **DeepAmino**. La pantalla está dividida en dos secciones principales:
+
+1. **Izquierda - Amino Acid Sequence**: Esta sección contiene el encabezado "Amino Acid Sequence" y presenta la secuencia de aminoácidos procesada a partir de un archivo que el usuario subió. Se muestra un identificador de la proteína (por ejemplo, "Protein NM_001301717.2") junto con el porcentaje de GC (contenido de guanina y citosina). Debajo, hay una secuencia larga de aminoácidos. También hay un botón para "Show full sequence" (Mostrar secuencia completa) y otro para "Download result" (Descargar resultado).
+
+2. **Derecha - Additional Information**: Esta sección, titulada "Additional Information," muestra información detallada sobre la proteína, incluyendo:
+   - **Description**: una breve descripción de la proteína (en este caso, el receptor de quimiocinas CCR7 en humanos).
+   - **Comment**: un comentario que menciona la curación de la información en la base de datos NCBI.
+   - **Locus**: el código específico y fecha de la referencia.
+   - **Source** y **Organism**: la fuente y el organismo (humanos, en este caso) al que pertenece la proteína.
+   - **Gene** y **Gene Synonyms**: el nombre del gen y sus sinónimos.
+   - **References**: referencias bibliográficas relevantes, con detalles como título, autores, y la fuente del artículo.
+
+Hay botones como "Show more" para expandir la información y "Show all references" para ver todas las referencias. En conjunto, esta página facilita tanto la visualización de la secuencia de aminoácidos como el acceso a información contextual y bibliográfica sobre la proteína.
+
+<div align="center">
+    <img src="images_readme/results.png" alt="Index.html" />
+      <p><strong>Figura 3.</strong> Página de resultados.</p> 
+  </div>
+
+## 3. Dependencias
+
+Para la ejecución de la aplicación, se han utilizado las siguientes bibliotecas externas:
+
+- **Flask**: empleada para el desarrollo de la interfaz web, permitiendo la creación de rutas y la gestión de la interacción con el usuario a través del navegador.
+- **Biopython**: utilizada para el procesamiento y análisis de secuencias de nucleótidos, incluyendo la conversión de secuencias de ADN a aminoácidos.
+- **Requests**: encargada de realizar las solicitudes HTTP a la API de manera interna, facilitando la obtención de información adicional sobre las proteínas.
+
+Estas bibliotecas deben estar instaladas para garantizar el correcto funcionamiento de la aplicación.
+
+## 4. Instrucciones de Ejecución
+
+Para iniciar la aplicación, es necesario ejecutar primero el módulo API en Java, el cual se encuentra en la rama `dev_scrapping` de este repositorio. Posteriormente, debe ejecutarse el archivo `web_service.py`, que inicializa la página web.
+
+Las rutas disponibles en la página web son las siguientes:
+
+- `http://localhost:5000/deepamino/search`: dirige a la página principal.
+- `http://localhost:5000/deepamino/process_search`: procesa el identificador introducido en la barra de búsqueda y redirige a la página de resultados.
+- `http://localhost:5000/deepamino/process_most_search`: procesa los archivos más buscados, almacenados en la aplicación para facilitar el acceso, y redirige a la página de resultados.
+- `http://localhost:5000/deepamino/upload`: maneja la lógica de carga de archivos y redirige a la página de resultados.
+- `http://localhost:5000/deepamino/results`: muestra los resultados generados a partir de las diferentes formas del `index.html`.
+- `http://localhost:5000/deepamino/download/<filename>`: ejecuta la descarga del archivo resultante. 
+
+Estas rutas permiten navegar y operar la aplicación web, proporcionando funcionalidades de búsqueda, procesamiento y descarga de archivos de secuencias de proteínas.
+
+
+## 5. Posibles Mejoras y Trabajo Futuro
+
+Este apartado puede incluir ideas para mejorar la aplicación, como:
+- Soporte para otros tipos de archivos de secuencias.
+- Integración con otras bases de datos de proteínas.
+- Mejoras en la interfaz de usuario, como añadir opciones de filtrado en los resultados.
+- Implementación de autenticación de usuario para gestionar cargas y descargas de archivos.
