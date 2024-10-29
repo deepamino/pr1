@@ -27,5 +27,7 @@ Todo lo mencionado previamente ha sido implementado, incluyendo una interfaz de 
       <p><strong>Figura 1.</strong> Diagrama de clases para el módulo "process".</p> 
   </div>
 
-- `/web_files/static`
+- `/web_files/static`: este directorio contiene las imágenes y hojas de estilo CSS utilizadas para el diseño de la página web.
+- `/web_files/templates`: este directorio contiene archivos HTML que sirven como estructuras base para las páginas del sitio.
+- `/web_files/web_service.py`: este archivo inicializa la aplicación web en Flask que permite la búsqueda, procesamiento y descarga de información sobre proteínas a partir de términos de búsqueda o archivos .fasta, utilizando una interfaz de usuario y varios servicios de API para gestionar y presentar datos relacionados con secuencias de proteínas.
 
