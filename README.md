@@ -104,3 +104,15 @@ Este apartado puede incluir ideas para mejorar la aplicación, como:
 - Integración con otras bases de datos de proteínas.
 - Mejoras en la interfaz de usuario, como añadir opciones de filtrado en los resultados.
 - Implementación de autenticación de usuario para gestionar cargas y descargas de archivos.
+
+
+<br>
+
+## A. Descarga de ficheros FASTA
+
+Los ficheros FASTA utilizados en esta práctica se encuentran en la carpeta `uploads` del repositorio. Para descargarlos, se hace uso de la plataforma ofrecida por [NCBI](https://www.ncbi.nlm.nih.gov/datasets/), National Center for Biotechnology Information, a través de [NCBI Datasets](https://www.ncbi.nlm.nih.gov/datasets/). Si accede a esta última, verá la siguiente pantalla:
+
+<div align="center">
+    <img src="images_readme/ncbi_datasets.png" alt="NCBI" />
+      <p><strong>Figura 4.</strong> Página de NCBI Datasets.</p> 
+  </div>
