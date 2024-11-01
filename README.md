@@ -117,14 +117,14 @@ Los ficheros FASTA utilizados en esta práctica se encuentran en la carpeta `upl
       <p><strong>Figura 4.</strong> Página de NCBI Datasets.</p> 
   </div>
 
-  Llegados a este punto, podemos especificar el término de búsqueda deseado. En nuestro caso, introduciremos `Homo sapiens (human)`, con el objetivo secuencias de nucleótidos asociadas a proteínas humanas. Esto nos llevará a una página que contendrá información relevante sobre el contenido que NCBI posee del organismo en cuestión, tal y como se muestra en la Figura 5.
+  Llegados a este punto, podemos especificar el término de búsqueda deseado. En nuestro caso, introduciremos `Homo sapiens (human)`, con el objetivo de encontrar secuencias de nucleótidos asociadas a proteínas humanas. Esto nos llevará a una página que contendrá información relevante sobre el contenido que NCBI posee del organismo en cuestión, tal y como se muestra en la Figura 5.
 
 <div align="center">
     <img src="images_readme/nucleotides.jpeg" alt="Human" />
       <p><strong>Figura 5.</strong> Página de resultados</p>
   </div>
 
-  Podemos ahora hacer click en el número que se muestra al lado de 'All nucleotide sequence', lo que nos llevará a una página que permita buscar las distintas secuencias de nucleotidos del organismo. En la parte superior, tal y como se muestra en la Figura 6, podemos especificar qué tipo de secuencias queremos buscar, como por ejemplo la secuencia que codifica para una proteína, como podría ser el caso de la hemoglobina.
+  Podemos ahora hacer click en el número que se muestra al lado de `All nucleotide sequences`, lo que nos llevará a una página que permita buscar las distintas secuencias de nucleotidos del organismo. En la parte superior, tal y como se muestra en la Figura 6, podemos especificar qué tipo de secuencias queremos buscar, como por ejemplo la secuencia que codifica para una proteína, como podría ser el caso de la hemoglobina.
 
 <div align="center">
     <img src="images_readme/nucleotide_db.jpeg" alt="Protein" />
@@ -138,10 +138,47 @@ Los ficheros FASTA utilizados en esta práctica se encuentran en la carpeta `upl
       <p><strong>Figura 7.</strong> Selección de varias secuencias</p>
   </div>
 
-  Finalmente, abajo del todo en el apartado `Send to`, podemos descargar el fichero FASTA mencionado, tal y como se muestra en la Figura 8.
+  Finalmente, abajo del todo en el apartado `Send to`, podemos descargar el fichero FASTA mencionado, tal y como se muestra en la Figura 8. Basta para ello seleccionar el formato del fichero y clicar en `Create File`.
 
 <div align="center">
     <img src="images_readme/fasta_download.jpeg" alt="Download" />
       <p><strong>Figura 8.</strong> Descarga de fichero FASTA</p>
   </div>
 
+  Si introducimos el siguiente prompt en la barra de búsqueda en la base de datos de nucleotidos, podemos descargar el fichero FASTA que contiene la secuencia de nucleótidos codificadoras de la hemoglobina, insulina, colágeno y queratina:
+
+  ```bash
+  txid9606[organism:exp] AND (
+    AH002813.2[All Fields] OR 
+    AJ009655.1[All Fields] OR 
+    DQ659148.1[All Fields] OR 
+    J00124.1[All Fields]
+  ) 
+  ```
+
+  Donde se han buscado las secuencias de nucleótidos haciendo uso de sus identificadores. El resultado será una pantalla similar a la de la Figura 7, donde podemos seleccionar todas las proteínas y descargarlas en un único fichero FASTA, en `Send to`.
+
+<div align="center">
+    <img src="images_readme/mult_seq.jpeg" alt="Download" />
+      <p><strong>Figura 9.</strong> Descarga de fichero FASTA con las secuencias de nucleótidos de las proteínas más buscadas.</p>
+  </div>
+
+  El fichero FASTA final se encuentra en la carpeta [uploads](uploads/global.fasta) de este repositorio, y tiene la siguiente estructura:
+
+  ```bash
+  >J00124.1 Homo sapiens 50 kDa type I epidermal keratin gene, complete cds
+CCCAGGGTCCGATGGGAAAGTGTAGCCTGCAGGCCCACACCTCCCCCTGTGAATCACGCCTGGCGGGACA
+...
+
+>AH002813.2 Homo sapiens alpha-1 type II collagen (COL2A1) gene, partial cds
+CGCAGAGCGCTGCTGGGCTGCCGGGTCTCCCGCTTCCTCCTCCTGCTCCAAGGGCCTCCTGCATGAGGGC
+...
+
+>AJ009655.1 Homo sapiens ins gene, partial
+AGCAGGTCTGTTCCAAGGGCCTTTGCGTCAGGTGGGCTCAGGGTTCCAGGGTGGCTGGACCCCAGGCCCC
+...
+
+>DQ659148.1 Homo sapiens hemoglobin (HBB) gene, promoter region, exons 1, 2 and partial cds
+GGCATGAAAGTCAGGGCAGAGCCATCTATTGCTTACATTTGCTTCTGACACAACTGTGTTCACTAGCAAC
+...
+```
