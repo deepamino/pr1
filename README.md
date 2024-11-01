@@ -116,3 +116,17 @@ Los ficheros FASTA utilizados en esta práctica se encuentran en la carpeta `upl
     <img src="images_readme/ncbi.jpeg" alt="NCBI" />
       <p><strong>Figura 4.</strong> Página de NCBI Datasets.</p> 
   </div>
+
+  Llegados a este punto, podemos especificar el término de búsqueda deseado. En nuestro caso, introduciremos `Homo sapiens (human)`, con el objetivo secuencias de nucleótidos asociadas a proteínas humanas. Esto nos llevará a una página que contendrá información relevante sobre el contenido que NCBI posee del organismo en cuestión, tal y como se muestra en la Figura 5.
+
+<div align="center">
+    <img src="images_readme/nucleotides.jpeg" alt="Human" />
+      <p><strong>Figura 5.</strong> Página de resultados</p>
+  </div>
+
+  Podemos ahora hacer click en el número que se muestra al lado de 'All nucleotide sequence', lo que nos llevará a una página que permita buscar las distintas secuencias de nucleotidos del organismo. En la parte superior, tal y como se muestra en la Figura 6, podemos especificar qué tipo de secuencias queremos buscar, como por ejemplo la secuencia que codifica para una proteína, como podría ser el caso de la hemoglobina.
+
+<div align="center">
+    <img src="images_readme/nucleotide_db.jpeg" alt="Protein" />
+      <p><strong>Figura 6.</strong> Página de búsqueda de secuencias de proteínas.</p>
+  </div>
