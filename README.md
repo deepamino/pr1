@@ -130,3 +130,18 @@ Los ficheros FASTA utilizados en esta práctica se encuentran en la carpeta `upl
     <img src="images_readme/nucleotide_db.jpeg" alt="Protein" />
       <p><strong>Figura 6.</strong> Página de búsqueda de secuencias de proteínas.</p>
   </div>
+
+  Al pinchar en buscar, podemos ver una lista de secuencias de nucleótidos relacionadas con lo buscado. Si pinchamos en alguna de ellas, se nos redirigirá a una página con información detallada sobre la secuencia, donde se nos permita descargar el fichero en formato FASTA. No obstante, también es posible hacer click en los checkboxes de las secuencias que nos interesen y, posteriormente, descargar un único fichero FASTA que contenga todas las secuencias seleccionadas.
+
+<div align="center">
+    <img src="images_readme/seq_selection.jpeg" alt="Info" />
+      <p><strong>Figura 7.</strong> Selección de varias secuencias</p>
+  </div>
+
+  Finalmente, abajo del todo en el apartado `Send to`, podemos descargar el fichero FASTA mencionado, tal y como se muestra en la Figura 8.
+
+<div align="center">
+    <img src="images_readme/fasta_download.jpeg" alt="Download" />
+      <p><strong>Figura 8.</strong> Descarga de fichero FASTA</p>
+  </div>
+
