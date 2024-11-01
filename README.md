@@ -42,6 +42,10 @@ La página está dividida en dos secciones:
 1. **Izquierda**: Hay un cuadro de subida de archivos con el título "Upload your FASTA file". Este cuadro permite al usuario cargar un archivo en formato FASTA, que contiene secuencias de nucleótidos o aminoácidos. Debajo de la instrucción hay un botón para seleccionar el archivo y otro botón de "Upload" para cargarlo en la aplicación.
 
 2. **Derecha**: Un cuadro de búsqueda con un campo de texto para que el usuario ingrese un término, el cual debe ser el identificador correspndiente a la base de datos del *National Center for Biotechnology Information* y un botón de búsqueda a la derecha. Debajo, hay una sección titulada "Most Searched" que muestra enlaces a proteínas populares como *Hemoglobin*, *Insulin*, *Collagen*, y *Keratin*.
+   - Hemoglobina: protreína que transporta oxígeno desde los pulmones hacia los tejidos del cuerpo y ayuda a llevar dióxido de carbono de vuelta a los pulmones para su eliminación.
+   - Insulina: proteína que ayuda a regular los niveles de glucosa en la sangre, permitiendo que las células absorban la glucosa para usarla como energía.
+   - Colágeno: proteína que proporciona estructura, resistencia y elasticidad a tejidos como la piel, los huesos, los tendones y los ligamentos.
+   - Queratina: proteína que protege y fortalece estructuras como el cabello, las uñas y la piel, aportándoles resistencia y durabilidad.
 
 <div align="center">
     <img src="images_readme/index.png" alt="Index.html" />
